@@ -7,7 +7,7 @@
   --color-primary: hsl(248 80% 71%);
   --color-primary-foreground: hsl(0 0% 100%);
 
-  --color-hero-bg: hsl(240 8% 11%);
+  --color-hero-bg: hsl(240 30% 6%);
   --color-hero-foreground: hsl(0 0% 100%);
   --color-hero-muted: hsl(240 20% 85%);
   --color-hero-card: hsl(240 8% 16%);
@@ -92,6 +92,103 @@
     color: var(--color-hero-muted);
   }
 
+  /* Section pill badges */
+  .badge-light {
+    display: inline-block;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    background: var(--color-secondary);
+    font-size: 0.875rem;
+    color: var(--color-secondary-foreground);
+    margin-bottom: 1.5rem;
+  }
+
+  .badge-dark {
+    display: inline-block;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid hsl(248 80% 71% / 0.2);
+    font-size: 0.875rem;
+    color: var(--color-hero-muted);
+    margin-bottom: 1rem;
+  }
+
+  .badge-border {
+    display: inline-block;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground);
+    margin-bottom: 1rem;
+  }
+
+  .badge-primary-text {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--color-primary);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Card variants */
+  .card-light {
+    background: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.07), 0 1px 2px -1px rgb(0 0 0 / 0.07);
+  }
+
+  .card-dark {
+    background: var(--color-hero-card);
+    border-radius: 1.5rem;
+    color: white;
+  }
+
+  /* Icon box for feature cards */
+  .icon-box {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: hsl(248 80% 71% / 0.2);
+    color: var(--color-primary);
+  }
+
+  .icon-box-light {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: hsl(248 80% 71% / 0.1);
+    color: var(--color-primary);
+  }
+
+  /* Primary chip */
+  .chip-primary {
+    display: inline-flex;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: hsl(248 80% 71% / 0.1);
+    color: var(--color-primary);
+    border: 1px solid hsl(248 80% 71% / 0.2);
+  }
+
+  /* Glow shadow for pricing card */
+  .shadow-glow {
+    box-shadow: 0 0 0 1px hsl(248 80% 71% / 0.3), 0 20px 60px -10px hsl(248 80% 71% / 0.3);
+  }
+
+  /* Legacy kept for compatibility */
   .number-badge {
     font-size: 0.75rem;
     font-weight: 600;
@@ -124,32 +221,5 @@
     color: hsl(248 65% 40%);
     font-family: var(--font-display);
     letter-spacing: 0.05em;
-  }
-
-  .sphere-glow {
-    width: 340px;
-    height: 340px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, hsl(260 70% 60%) 0%, hsl(248 80% 45%) 40%, hsl(240 60% 20%) 70%, transparent 100%);
-    box-shadow: 0 0 80px 20px hsl(248 80% 71% / 0.4), 0 0 160px 40px hsl(248 80% 71% / 0.15);
-    position: relative;
-  }
-
-  .sphere-glow::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.15) 0%, transparent 50%);
-  }
-
-  .sphere-dots {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    overflow: hidden;
-    opacity: 0.3;
-    background-image: radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px);
-    background-size: 18px 18px;
   }
 }
