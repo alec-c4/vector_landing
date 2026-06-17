@@ -1,17 +1,971 @@
 ---
+import '../styles/global.css';
 
+const teachers = [
+  {
+    name: "Светлана Беликова",
+    photo: "/speaker-svetlana-CnhxxKjs.jpg",
+    role: "Руководитель и финансовый директор сети ветеринарных клиник «Астин»",
+    tags: ["Операционка", "Сервис", "Процессы", "Регион", "Команда"],
+    bullets: [
+      "Руководит развитием сети с 2004 года: масштабирование, команда, экономика бизнеса",
+      "Более 20 лет опыта в управлении ветеринарным бизнесом",
+      "Эксперт по операционному управлению, финансовому и налоговому планированию",
+      "Специализируется на выстраивании устойчивых процессов и управлении эффективностью клиники",
+      "Руководитель секции «Менеджмент» на Национальной Ветеринарной Конференции (NVC)",
+      "Спикер ведущих отраслевых конференций (Санкт-Петербург, Минск, Биоконтроль, Компаньон, Radenis и др.)",
+      "Председатель комитета по развитию и общественным связям Национальной ветеринарной палаты",
+      "Образование: ГУЗ (оценка и управление городскими территориями), ГУУ (менеджмент), ВШЭ (маркетинг и развитие бизнеса), Сколково (Healthcare Management)",
+    ],
+  },
+  {
+    name: "Сергей Мендоса-Истратов",
+    photo: "/speaker-sergey-DAdDAc3d.jpg",
+    role: "Основатель сети клиник «Белый Клык»",
+    tags: ["Стратегия", "NVC", "Лидерство", "Сетевой бизнес", "Визионер"],
+    bullets: [
+      "Более 45 лет стажа в ветеринарной индустрии",
+      "Родоначальник институциональных изменений в индустрии — специализация и госпитальное лечение",
+      "Создатель одной из наиболее сильных и системных частных ветеринарных сетей страны",
+      "Организатор и идейный вдохновитель конференции NVC — ключевой отраслевой площадки России",
+      "Сооснователь и руководитель проекта «ВЕКТОР»",
+      "С 2016 года основатель образовательного центра «Коллегия ветеринарных специалистов»",
+      "Основатель Национальной ветеринарной палаты",
+      "Образование: Московская Ветеринарная Академия (1993, «Ветеринария»), ГУУ (менеджмент), Сколково (Healthcare Management)",
+    ],
+  },
+  {
+    name: "Александра Анохина",
+    photo: "/speaker-anokhina-DGmDvB-1.jpg",
+    role: "Топ 30 в клинике ранней реабилитации «Три Сестры»",
+    tags: ["Операционка", "Медицина", "Команда", "Стандарты", "ISFM"],
+    bullets: [
+      "Ветеринарный врач с более чем 15-летним практическим опытом",
+      "Прошла путь от ассистента до заместителя главного врача (клиники «Центр», «Белый Клык»)",
+      "Участвовала в запуске ветеринарного направления группы компаний «Инвитро»",
+      "Руководила ветеринарной клиникой, выстраивая операционные процессы, работу команды и качество медицинской помощи",
+      "Участвовала в подготовке клиники к международной аккредитации JCI",
+      "Сооснователь и участник Российского общества медицины кошек (RSFM)",
+      "Член международного общества медицины кошек (ISFM)",
+      "Спикер международных и российских конференций, в том числе NVC с 2018 года",
+    ],
+  },
+];
+
+const modules = [
+  {
+    num: "1",
+    title: "Стратегия и самоанализ бизнеса",
+    desc: "Практический модуль по диагностике клиники, стратегическому мышлению и пониманию своей управленческой роли.",
+    duration: "1 неделя",
+    topics: [
+      "Клиника как бизнес-система: из чего состоит управление",
+      "Стратегия, миссия и позиционирование клиники",
+      "Экспресс-анализ своей клиники",
+      "Конкурентная стратегия и выбор ниши",
+      "Роли руководителя: лидер, менеджер, владелец, клиницист",
+      "Стратегический план и бизнес-план: как связаны решения и ресурсы",
+    ],
+  },
+  {
+    num: "2",
+    title: "Маркетинг и клиентский опыт",
+    desc: "Системный взгляд на привлечение клиентов, удержание и сервис как конкурентное преимущество.",
+    duration: "1 неделя",
+    topics: [
+      "Клиентский путь: 8 этапов взаимодействия",
+      "Цифровой маркетинг для ветеринарной клиники",
+      "Управление отзывами и репутацией",
+      "Сервис как инструмент удержания",
+      "Ценообразование и позиционирование",
+      "Аналитика маркетинговых каналов",
+    ],
+  },
+  {
+    num: "3",
+    title: "Управление персоналом",
+    desc: "Найм, адаптация, мотивация и удержание сотрудников ветеринарной клиники.",
+    duration: "1 неделя",
+    topics: [
+      "Системный найм: от профиля до оффера",
+      "Адаптация новых сотрудников",
+      "Система мотивации и KPI",
+      "Обратная связь и оценка персонала",
+      "Управление конфликтами в команде",
+      "Роль руководителя в формировании культуры",
+    ],
+  },
+  {
+    num: "4",
+    title: "Финансовое управление",
+    desc: "Экономика клиники, управленческий учёт и принятие финансовых решений.",
+    duration: "1 неделя",
+    topics: [
+      "Управленческий учёт vs бухгалтерский учёт",
+      "Ключевые финансовые показатели клиники",
+      "Бюджетирование и финансовое планирование",
+      "Управление себестоимостью услуг",
+      "Анализ прибыльности направлений",
+      "Налоговое планирование",
+    ],
+  },
+  {
+    num: "5",
+    title: "Организация медицинской деятельности",
+    desc: "Стандарты медицинской помощи, протоколы и управление качеством.",
+    duration: "1 неделя",
+    topics: [
+      "Медицинские стандарты и протоколы",
+      "Управление качеством медицинской помощи",
+      "Работа с осложнениями и жалобами",
+      "Специализация и профиль клиники",
+      "Оборудование и операционные процессы",
+      "Взаимодействие врачей и администрации",
+    ],
+  },
+  {
+    num: "6",
+    title: "Комплаенс и управление рисками",
+    desc: "Правовые основы, лицензирование и управление операционными рисками.",
+    duration: "1 неделя",
+    topics: [
+      "Лицензирование ветеринарной деятельности",
+      "Трудовое законодательство для клиник",
+      "Защита персональных данных клиентов",
+      "Управление репутационными рисками",
+      "Страхование и ответственность",
+      "Проверки и взаимодействие с контролирующими органами",
+    ],
+  },
+  {
+    num: "7",
+    title: "Операционная эффективность",
+    desc: "Процессы, автоматизация и масштабирование ветеринарного бизнеса.",
+    duration: "1 неделя",
+    topics: [
+      "Описание и оптимизация бизнес-процессов",
+      "Автоматизация и цифровые инструменты",
+      "Управление расписанием и загрузкой",
+      "Масштабирование: от одной клиники к сети",
+      "KPI операционного управления",
+      "Стратегия роста на 3–5 лет",
+    ],
+  },
+];
+
+const faqs = [
+  { q: "Кому подходит программа?", a: "Программа предназначена для собственников, управляющих и главных врачей ветеринарных клиник, которые хотят выстроить системное управление и развить бизнес." },
+  { q: "Подойдёт ли курс, если у меня небольшая клиника?", a: "Да. Программа помогает клиникам любого размера — от небольших частных практик до крупных многопрофильных центров. Практические задания адаптируются под масштаб вашего бизнеса." },
+  { q: "Подойдёт ли курс сетям и крупным клиникам?", a: "Да, программа охватывает вопросы масштабирования, управления сетью и стратегического развития, которые актуальны для крупных игроков рынка." },
+  { q: "Это обучение для врачей или для руководителей?", a: "Программа направлена на управленческие компетенции. Она одинаково полезна как для практикующих врачей, переходящих в управление, так и для опытных руководителей без медицинского фона." },
+  { q: "Что я получу после курса?", a: "Системное понимание управления клиникой, готовый индивидуальный план развития, инструменты для работы с командой и финансами, доступ к закрытому сообществу руководителей и сертификат об окончании." },
+  { q: "Сколько времени нужно уделять обучению?", a: "В среднем 3–5 часов в неделю: онлайн-уроки, практические задания и работа с материалами своей клиники. Плюс три офлайн-интенсива за время программы." },
+  { q: "Можно ли проходить обучение командой?", a: "Это один из ключевых принципов программы. Обучение управленческой командой (собственник + управляющий + главный врач) даёт максимальный эффект, так как вы работаете в общей системе координат." },
+  { q: "Если у меня нет управляющего, мне подойдёт?", a: "Да. Многие участники проходят программу самостоятельно. Кроме того, курс поможет вам понять, когда и как нанять управляющего, и чётко сформулировать его роль." },
+  { q: "Чем ВЕКТОР отличается от обычных курсов по менеджменту?", a: "Программа создана специально для ветеринарной отрасли — все примеры, инструменты и кейсы взяты из реальной практики ветеринарных клиник. Вы не адаптируете чужой опыт, а работаете сразу с вашей клиникой." },
+  { q: "Будет ли обратная связь?", a: "Да. Каждый участник получает личного куратора, обратную связь по домашним заданиям и возможность задавать вопросы экспертам на протяжении всей программы." },
+  { q: "Что если я уже опытный руководитель?", a: "Программа даст вам структурированный взгляд на управление, позволит выявить слепые зоны и обогатит практическими инструментами, которые можно применять сразу." },
+  { q: "Можно ли оставить заявку и получить консультацию?", a: "Да. Заполните форму ниже, и наш менеджер свяжется с вами, чтобы ответить на все вопросы и помочь принять решение." },
+];
+
+const radarDirections = ["Стратегия", "Маркетинг", "Персонал", "Финансы", "Медицина", "Комплаенс", "Операционка"];
+
+// Radar polygon points helper (computed at build time)
+function radarPoints(values: number[], maxR: number): string {
+  return values.map((v, k) => {
+    const angle = (k * 2 * Math.PI / values.length) - Math.PI / 2;
+    const r = v * maxR;
+    return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
+  }).join(' ');
+}
+
+function gridPoints(level: number, sides: number, maxR: number): string {
+  return Array.from({ length: sides }, (_, k) => {
+    const angle = (k * 2 * Math.PI / sides) - Math.PI / 2;
+    const r = level * maxR / 4;
+    return `${Math.cos(angle) * r},${Math.sin(angle) * r}`;
+  }).join(' ');
+}
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Первая школа управления для профессионалов ветеринарного бизнеса. Эффективно управляйте финансами и людьми, развивайте бизнес и масштабируйтесь." />
+    <meta name="author" content="Вектор" />
+    <meta property="og:title" content="Вектор — Школа управления ветеринарным бизнесом" />
+    <meta property="og:description" content="Первая школа управления для профессионалов ветеринарного бизнеса." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vectorvet.ru/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>Вектор — Школа управления ветеринарным бизнесом</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+  </head>
+
+  <body>
+
+    <!-- NAV -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded">
+      Перейти к основному содержанию
+    </a>
+    <nav
+      id="main-nav"
+      aria-label="Основная навигация"
+      class="fixed top-0 left-0 right-0 z-50 border-b border-white/5"
+      style="background: hsl(240 8% 11% / 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);"
+    >
+      <div class="container mx-auto flex items-center justify-between h-16">
+        <a href="#" aria-label="ВЕКТОР — на главную">
+          <img src="/logo.png" alt="ВЕКТОР" class="h-8 w-auto" width="80" height="32" />
+        </a>
+        <div class="hidden md:flex items-center gap-8" role="list">
+          <a href="#program" role="listitem" class="text-sm transition-colors" style="color: hsl(240 20% 85%);">Что нас отличает</a>
+          <a href="#speakers" role="listitem" class="text-sm transition-colors" style="color: hsl(240 20% 85%);">Преподаватели</a>
+          <a href="#format" role="listitem" class="text-sm transition-colors" style="color: hsl(240 20% 85%);">Программа обучения</a>
+          <a href="#pricing" role="listitem" class="text-sm transition-colors" style="color: hsl(240 20% 85%);">Тарифы</a>
+          <a href="#contacts" role="listitem" class="text-sm transition-colors" style="color: hsl(240 20% 85%);">Контакты</a>
+          <a
+            href="#pricing"
+            class="text-sm font-medium px-5 py-2 rounded-full text-white transition-opacity hover:opacity-90"
+            style="background: hsl(248 75% 52%);"
+          >Забронировать место</a>
+        </div>
+        <button
+          id="mobile-menu-btn"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          class="md:hidden p-2 text-white"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-white/5" style="background: hsl(240 8% 11%);">
+        <nav class="container mx-auto py-4 flex flex-col gap-2">
+          <a href="#program" class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">Что нас отличает</a>
+          <a href="#speakers" class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">Преподаватели</a>
+          <a href="#format" class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">Программа обучения</a>
+          <a href="#pricing" class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">Тарифы</a>
+          <a href="#contacts" class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">Контакты</a>
+          <a href="#pricing" class="text-sm font-medium px-5 py-2.5 rounded-full text-white text-center mt-2" style="background: hsl(248 75% 52%);">Забронировать место</a>
+        </nav>
+      </div>
+    </nav>
+
+    <main id="main-content">
+
+    <!-- HERO -->
+    <section
+      aria-labelledby="hero-heading"
+      class="relative min-h-screen overflow-hidden flex items-center"
+      style="background: rgb(11, 11, 20); padding-top: 4rem;"
+    >
+      <!-- Purple sphere (desktop) -->
+      <div class="hidden md:flex absolute right-0 top-0 h-full w-1/2 items-center justify-center pointer-events-none" aria-hidden="true">
+        <div class="sphere-glow">
+          <div class="sphere-dots"></div>
+        </div>
+        <div class="absolute inset-0" style="background: linear-gradient(to right, rgb(11, 11, 20) 0%, transparent 40%);"></div>
+      </div>
+      <!-- Mobile glow -->
+      <div class="md:hidden absolute inset-0 pointer-events-none opacity-25" aria-hidden="true"
+        style="background: radial-gradient(circle at 70% 20%, hsl(248 80% 50% / 0.6), transparent 55%);">
+      </div>
+
+      <div class="container mx-auto relative z-10 py-24">
+        <div class="max-w-2xl">
+          <div
+            class="inline-flex items-center mb-6 px-3 py-1 rounded-full text-xs font-medium"
+            style="background: hsl(248 80% 71% / 0.12); color: hsl(248 80% 80%);"
+          >
+            Школа управления · сентябрь 2026
+          </div>
+          <h1 id="hero-heading" class="font-display font-bold text-white leading-tight mb-4" style="font-size: clamp(2rem, 5vw, 3.5rem);">
+            Первая <span class="text-gradient">школа управления</span> для профессионалов ветеринарного бизнеса
+          </h1>
+          <p class="text-base md:text-lg mb-8 max-w-lg" style="color: hsl(240 20% 85%);">
+            Системное управление ветеринарной клиникой на основе лучших практик отрасли
+          </p>
+          <a
+            href="#pricing"
+            class="inline-flex items-center font-medium px-7 py-3 rounded-full text-white text-base transition-opacity hover:opacity-90"
+            style="background: hsl(248 75% 52%);"
+          >Забронировать место</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Что нас отличает -->
+    <section id="program" class="py-20 bg-white" aria-labelledby="program-heading">
+      <div class="container mx-auto">
+        <p class="section-label">Что нас отличает</p>
+        <h2 id="program-heading" class="font-display text-3xl md:text-4xl font-bold mb-12" style="color: hsl(230 25% 10%);">
+          Программа, созданная<br class="hidden md:block" /> для ветеринарии
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {[
+            { n: "01", t: "Заметные улучшения в работе вашей клиники", d: "Программа построена так, чтобы обучение можно было совмещать с управлением клиникой и сразу внедрять изменения в практике." },
+            { n: "02", t: "Специально для ветеринарного рынка", d: "Все примеры, инструменты и управленческие решения основаны на практике ветеринарных клиник." },
+            { n: "03", t: "Основано на лучшем опыте отрасли", d: "Подход и программа сформированы на основе многолетней работы лидеров ветеринарной индустрии и анализа запросов участников рынка." },
+            { n: "04", t: "Работа с клиникой как с единой системой", d: "Собственники, управляющие и главные врачи учатся вместе, чтобы формировать общий управленческий язык и систему координат." },
+            { n: "05", t: "Управленческие задачи каждый день", d: "Экономика услуг, расписания, загрузка оборудования, сервис, процессы, команда и операционная работа клиники." },
+            { n: "06", t: "Подходит для клиник разного масштаба", d: "Программа помогает как небольшим клиникам, так и сетям выстраивать более устойчивую систему управления." },
+            { n: "07", t: "Профессиональное окружение", d: "После окончания программы участники сохраняют доступ к профессиональному сообществу и продолжают обмен опытом." },
+          ].map(item => (
+            <div class="p-6 rounded-2xl border flex flex-col gap-3 hover:shadow-md transition-shadow" style="border-color: hsl(240 10% 90%);">
+              <span class="number-badge-light">({item.n})</span>
+              <h3 class="font-display font-semibold text-lg" style="color: hsl(230 25% 10%);">{item.t}</h3>
+              <p class="text-sm leading-relaxed" style="color: hsl(240 8% 42%);">{item.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Преподаватели -->
+    <section id="speakers" class="py-20" style="background: hsl(240 8% 11%);" aria-labelledby="speakers-heading">
+      <div class="container mx-auto">
+        <p class="section-label-dark">Топовые преподаватели</p>
+        <h2 id="speakers-heading" class="font-display text-3xl md:text-4xl font-bold text-white mb-12 max-w-2xl">
+          Владельцы и управленцы ветеринарных клиник, лидеры мнений,&nbsp;<span class="text-gradient">спикеры ведущих конференций</span>
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          {teachers.map(teacher => (
+            <article class="rounded-2xl overflow-hidden flex flex-col" style="background: hsl(240 8% 16%);">
+              <div class="w-full aspect-[3/4] overflow-hidden" style="background: hsl(240 8% 20%);">
+                <img src={teacher.photo} alt={teacher.name} class="w-full h-full object-cover object-center" width="400" height="533" loading="lazy" />
+              </div>
+              <div class="p-6 flex flex-col gap-4">
+              <header>
+                <h3 class="font-display font-bold text-xl text-white mb-1">{teacher.name}</h3>
+                <p class="text-sm" style="color: hsl(240 20% 75%);">{teacher.role}</p>
+              </header>
+              <div class="flex flex-wrap gap-1.5" role="list" aria-label="Специализации">
+                {teacher.tags.map(tag => (
+                  <span role="listitem" class="text-xs px-2.5 py-1 rounded-full font-medium" style="background: hsl(248 80% 71% / 0.12); color: hsl(248 80% 80%);">{tag}</span>
+                ))}
+              </div>
+              <ul class="flex flex-col gap-2" aria-label="Достижения">
+                {teacher.bullets.map(b => (
+                  <li class="flex gap-2 text-sm" style="color: hsl(240 20% 70%);">
+                    <span class="flex-shrink-0 mt-0.5" style="color: hsl(248 80% 71%);" aria-hidden="true">•</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Почему нам доверяют -->
+    <section class="py-20 bg-white" aria-labelledby="trust-heading">
+      <div class="container mx-auto">
+        <p class="section-label">Наш опыт</p>
+        <h2 id="trust-heading" class="font-display text-3xl md:text-4xl font-bold mb-4" style="color: hsl(230 25% 10%);">Почему нам доверяют</h2>
+        <p class="text-base mb-12 max-w-2xl" style="color: hsl(240 8% 42%);">
+          ВЕКТОР создаётся лидерами ветеринарной индустрии и командой <strong>Национальной Ветеринарной Конференции (NVC)</strong>, которая много лет развивает крупнейшую образовательную среду ветеринарного рынка.
+        </p>
+        <div class="grid md:grid-cols-2 gap-5">
+          {[
+            { n: "01", t: "Запущены самые крупные ветеринарные клиники", d: "Реальный опыт запуска и масштабирования крупнейших ветеринарных сетей и федеральных проектов с миллиардными оборотами." },
+            { n: "02", t: "Институциональные изменения индустрии", d: "Внедрение специализаций и госпитальное лечение в клиниках — первопроходцы в создании современных стандартов ветеринарной медицины." },
+            { n: "03", t: "Более 20 лет в развитии отраслевого образования", d: "С 2013 года — системная работа с профессиональным сообществом, экспертами и лидерами рынка." },
+            { n: "04", t: "Основано на опыте отрасли", d: "Программа создана на базе работы команды NVC: более 8 000 участников ежегодно, 329 экспертов и свыше 500 отраслевых выступлений и кейсов." },
+          ].map(item => (
+            <div class="p-6 rounded-2xl border flex gap-5" style="border-color: hsl(240 10% 90%);">
+              <span class="number-badge-light flex-shrink-0 pt-0.5">({item.n})</span>
+              <div>
+                <h3 class="font-display font-semibold text-base mb-2" style="color: hsl(230 25% 10%);">{item.t}</h3>
+                <p class="text-sm leading-relaxed" style="color: hsl(240 8% 42%);">{item.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Три перспективы -->
+    <section class="py-20" style="background: hsl(240 10% 96%);" aria-labelledby="perspectives-heading">
+      <div class="container mx-auto">
+        <p class="section-label">Для кого</p>
+        <h2 id="perspectives-heading" class="font-display text-3xl md:text-4xl font-bold mb-4" style="color: hsl(230 25% 10%);">
+          Одна программа — <span class="text-gradient">три перспективы</span>
+        </h2>
+        <p class="text-base mb-12 max-w-2xl" style="color: hsl(240 8% 42%);">
+          Управленческая команда клиники: собственник, управляющий и главный врач. Теория общая — практические задания адаптируются под уровень ответственности и управленческую роль участника.
+        </p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {[
+            { n: "01", t: "Курс для всей управленческой команды клиники", d: "Общая образовательная база — с практическими заданиями, адаптированными под роль участника." },
+            { n: "02", t: "Стратегический уровень", d: "Собственник, управляющий партнёр. Развитие клиники, финансовая устойчивость, ключевые решения." },
+            { n: "03", t: "Операционный уровень", d: "Управляющий, директор клиники. Ежедневная работа клиники, команда, процессы и реализация управленческих решений." },
+            { n: "04", t: "Функциональный уровень", d: "Главный врач, руководитель отделения. Развитие своего направления и переход от экспертной роли к управленческой." },
+          ].map(item => (
+            <div class="bg-white p-6 rounded-2xl border flex flex-col gap-3" style="border-color: hsl(240 10% 90%);">
+              <span class="number-badge-light">({item.n})</span>
+              <h3 class="font-display font-semibold text-base" style="color: hsl(230 25% 10%);">{item.t}</h3>
+              <p class="text-sm leading-relaxed" style="color: hsl(240 8% 42%);">{item.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Управленческий радар -->
+    <section class="py-20" style="background: hsl(240 8% 11%);" aria-labelledby="radar-heading">
+      <div class="container mx-auto">
+        <p class="section-label-dark">Ключевой инструмент</p>
+        <h2 id="radar-heading" class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+          Управленческий радар: 7 направлений
+        </h2>
+        <p class="mb-10 max-w-xl" style="color: hsl(240 20% 85%);">
+          Два замера — в начале и в конце программы. Вы сможете увидеть изменения и динамику по всем 7 направлениям.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-12">
+          {radarDirections.map(d => (
+            <span class="px-4 py-2 rounded-full text-sm font-medium border" style="border-color: hsl(248 80% 71% / 0.3); color: hsl(248 80% 80%); background: hsl(248 80% 71% / 0.08);">{d}</span>
+          ))}
+        </div>
+
+        <!-- Radar SVG (decorative) -->
+        <div class="flex justify-center mb-16" aria-hidden="true">
+          <svg width="300" height="300" viewBox="-150 -150 300 300" xmlns="http://www.w3.org/2000/svg">
+            {[1,2,3,4].map(i => (
+              <polygon
+                points={gridPoints(i, 7, 120)}
+                fill="none"
+                stroke="hsl(248 80% 71% / 0.2)"
+                stroke-width="1"
+              />
+            ))}
+            {Array.from({length: 7}, (_, k) => {
+              const angle = (k * 2 * Math.PI / 7) - Math.PI / 2;
+              return <line x1="0" y1="0" x2={Math.cos(angle)*120} y2={Math.sin(angle)*120} stroke="hsl(248 80% 71% / 0.15)" stroke-width="1" />;
+            })}
+            <polygon
+              points={radarPoints([0.8, 0.6, 0.9, 0.7, 0.75, 0.65, 0.85], 120)}
+              fill="hsl(248 80% 71% / 0.15)"
+              stroke="hsl(248 80% 71%)"
+              stroke-width="2"
+            />
+            {radarDirections.map((label, k) => {
+              const angle = (k * 2 * Math.PI / 7) - Math.PI / 2;
+              const r = 138;
+              return (
+                <text
+                  x={Math.cos(angle) * r}
+                  y={Math.sin(angle) * r}
+                  text-anchor="middle"
+                  dominant-baseline="middle"
+                  fill="hsl(240 20% 75%)"
+                  font-size="11"
+                  font-family="Inter, sans-serif"
+                >{label}</text>
+              );
+            })}
+          </svg>
+        </div>
+
+        <!-- Three models -->
+        <p class="section-label-dark">Три перспективы</p>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">
+          Курс даёт <span class="text-gradient">три модели анализа</span> — каждая отвечает на свой вопрос
+        </h2>
+        <p class="mb-10 max-w-2xl" style="color: hsl(240 20% 85%);">
+          Все три модели анализа вводятся с первого дня обучения и проходят через всю программу. К завершению курса вы формируете системный подход к анализу и управлению клиникой.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="rounded-2xl p-6" style="background: hsl(240 8% 16%);">
+            <p class="text-xs font-medium mb-1" style="color: hsl(248 80% 75%);">Модель 1</p>
+            <h3 class="font-display font-bold text-white text-lg mb-2">Управленческий радар</h3>
+            <p class="text-sm mb-4" style="color: hsl(240 20% 85%);">Что у вас происходит?</p>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              {radarDirections.map(d => <span class="text-xs px-2 py-0.5 rounded" style="background: hsl(248 80% 71% / 0.1); color: hsl(248 80% 80%);">{d}</span>)}
+            </div>
+            <p class="text-xs leading-relaxed" style="color: hsl(240 20% 65%);">Карта 7 направлений управления. Заполняется на входе и на выходе программы — помогает увидеть изменения и динамику развития клиники.</p>
+          </div>
+          <div class="rounded-2xl p-6" style="background: hsl(240 8% 16%);">
+            <p class="text-xs font-medium mb-1" style="color: hsl(248 80% 75%);">Модель 2</p>
+            <h3 class="font-display font-bold text-white text-lg mb-2">Цепочка прибыли</h3>
+            <p class="text-sm mb-4" style="color: hsl(240 20% 85%);">Где точки роста?</p>
+            <ol class="flex flex-col gap-1">
+              {["Инвестиции в людей","Довольные сотрудники","Качество сервиса","Довольные клиенты","Удержание клиентов","Финансовый результат"].map((item, i, arr) => (
+                <li class="text-xs">
+                  <span style="color: hsl(240 20% 85%);">{item}</span>
+                  {i < arr.length - 1 && <div class="text-center text-xs my-0.5" style="color: hsl(248 80% 65%);">↓</div>}
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div class="rounded-2xl p-6" style="background: hsl(240 8% 16%);">
+            <p class="text-xs font-medium mb-1" style="color: hsl(248 80% 75%);">Модель 3</p>
+            <h3 class="font-display font-bold text-white text-lg mb-2">Клиентский путь</h3>
+            <p class="text-sm mb-4" style="color: hsl(240 20% 85%);">Что именно можно поменять?</p>
+            <ol class="flex flex-col gap-1">
+              {["Узнавание","Информирование","Рассмотрение","Выбор","Опыт","Повторное обращение","Рекомендация","Амбассадор"].map((item, i, arr) => (
+                <li class="text-xs">
+                  <span style="color: hsl(240 20% 85%);">{item}</span>
+                  {i < arr.length - 1 && <div class="text-center text-xs my-0.5" style="color: hsl(248 80% 65%);">↓</div>}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Программа обучения -->
+    <section id="format" class="py-20 bg-white" aria-labelledby="curriculum-heading">
+      <div class="container mx-auto">
+        <p class="section-label">Программа обучения</p>
+        <h2 id="curriculum-heading" class="font-display text-3xl md:text-4xl font-bold mb-2" style="color: hsl(230 25% 10%);">
+          Флагманский курс «Вектор»
+        </h2>
+        <p class="text-sm mb-10" style="color: hsl(240 8% 42%);">
+          3 офлайн-встречи · 2 месяца обучения · 7 практических домашних задания · 13 тестов
+        </p>
+        <div class="flex gap-2 overflow-x-auto pb-2 mb-8" role="tablist" aria-label="Модули программы">
+          {modules.map((m, i) => (
+            <button
+              role="tab"
+              aria-selected={i === 0 ? "true" : "false"}
+              aria-controls={`module-panel-${i}`}
+              id={`module-tab-${i}`}
+              data-tab-index={i}
+              class="module-tab flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors"
+              style={i === 0
+                ? "background: hsl(248 75% 52%); color: white;"
+                : "background: hsl(240 10% 94%); color: hsl(240 8% 42%);"}
+            >Модуль {m.num}</button>
+          ))}
+        </div>
+        <div>
+          {modules.map((m, i) => (
+            <div
+              role="tabpanel"
+              id={`module-panel-${i}`}
+              aria-labelledby={`module-tab-${i}`}
+              class={`module-panel rounded-2xl p-8 border${i !== 0 ? " hidden" : ""}`}
+              style="border-color: hsl(240 10% 90%);"
+            >
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <p class="number-badge-light mb-1">Модуль {m.num}</p>
+                  <h3 class="font-display font-bold text-2xl" style="color: hsl(230 25% 10%);">{m.title}</h3>
+                </div>
+                <span class="text-xs font-medium px-3 py-1 rounded-full" style="background: hsl(248 85% 96%); color: hsl(248 60% 35%);">{m.duration}</span>
+              </div>
+              <p class="text-sm mb-6" style="color: hsl(240 8% 42%);">{m.desc}</p>
+              <ul class="grid sm:grid-cols-2 gap-2">
+                {m.topics.map((topic, ti) => (
+                  <li class="flex gap-2 text-sm">
+                    <span class="flex-shrink-0 font-medium" style="color: hsl(248 80% 65%);">• Тема {ti + 1}.</span>
+                    <span style="color: hsl(230 25% 10%);">{topic}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Результаты курса -->
+    <section class="py-20" style="background: hsl(240 10% 96%);" aria-labelledby="outcomes-heading">
+      <div class="container mx-auto">
+        <p class="section-label">Результаты курса</p>
+        <h2 id="outcomes-heading" class="font-display text-3xl md:text-4xl font-bold mb-12" style="color: hsl(230 25% 10%);">
+          С чем вы выйдете после обучения
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {[
+            { n: "01", t: "Диагностика клиники по 7 ключевым направлениям", d: "Входная и итоговая оценка по системе «Колесо баланса управления клиникой». Помогает увидеть сильные стороны и приоритеты для работы.", tags: ["Стратегия","Команда","Финансы","Маркетинг","Медицина","Операционные процессы"] },
+            { n: "02", t: "Понимание своей роли и зоны ответственности", d: "Вы чётко понимаете: за что отвечаете именно вы, что можно делегировать, где проходит граница ролей внутри команды.", tags: [] },
+            { n: "03", t: "Индивидуальный план развития", d: "Вместо абстрактного «надо что-то улучшать» — конкретный маршрут: что исправлять в первую очередь, какие компетенции развивать.", tags: [] },
+            { n: "04", t: "Единый управленческий язык внутри команды", d: "Собственник, управляющий, главный врач начинают работать в одной системе координат: быстрее решения, меньше конфликтов.", tags: [] },
+            { n: "05", t: "Понимание, как устроен сильный ветеринарный бизнес", d: "Вы увидите клинику как систему, где всё связано между собой.", tags: ["Финансы","Команда","Маркетинг","Медицина","Сервис","Рост бизнеса"] },
+          ].map(item => (
+            <div class="bg-white p-6 rounded-2xl border flex flex-col gap-3" style="border-color: hsl(240 10% 90%);">
+              <span class="number-badge-light">({item.n})</span>
+              <h3 class="font-display font-semibold text-lg" style="color: hsl(230 25% 10%);">{item.t}</h3>
+              <p class="text-sm leading-relaxed" style="color: hsl(240 8% 42%);">{item.d}</p>
+              {item.tags.length > 0 && (
+                <div class="flex flex-wrap gap-1.5 mt-auto">
+                  {item.tags.map(tag => <span class="text-xs px-2 py-0.5 rounded-full" style="background: hsl(248 85% 96%); color: hsl(248 60% 35%);">{tag}</span>)}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Формат обучения -->
+    <section class="py-20 bg-white" aria-labelledby="learning-format-heading">
+      <div class="container mx-auto">
+        <p class="section-label">Формат обучения</p>
+        <h2 id="learning-format-heading" class="font-display text-3xl md:text-4xl font-bold mb-4" style="color: hsl(230 25% 10%);">
+          Обучение, встроенное в реальную работу клиники
+        </h2>
+        <p class="text-base mb-12 max-w-2xl" style="color: hsl(240 8% 42%);">
+          Практический формат для занятых собственников и управленцев: вы работаете на задачах своей клиники, внедряете изменения по ходу программы и получаете поддержку экспертов на каждом этапе.
+        </p>
+        <div class="grid md:grid-cols-2 gap-5">
+          {[
+            { n: "01", t: "Гибридный формат", d: "Офлайн-интенсивы для совместной работы и общения + онлайн для теории, заданий и поддержки куратора.", tags: ["Офлайн","Онлайн","Нетворкинг"] },
+            { n: "02", t: "Работа со своим материалом", d: "Работа строится на данных вашей клиники — на выходе вы получаете ясный анализ и точки роста.", tags: ["Ваши данные","Реальные кейсы"] },
+            { n: "03", t: "Наставничество и кураторство", d: "Куратор помогает адаптировать программу под вашу конкретную ситуацию. Наш курс — это процесс обучения с доведением до результата.", tags: ["Куратор","Сопровождение"] },
+            { n: "04", t: "Безопасная среда", d: "Пространство для профессионального диалога и обмена опытом с коллегами из отрасли.", tags: ["Сообщество","Коллеги","Обмен опытом"] },
+          ].map(item => (
+            <div class="p-6 rounded-2xl border flex flex-col gap-3" style="border-color: hsl(240 10% 90%);">
+              <span class="number-badge-light">({item.n})</span>
+              <h3 class="font-display font-semibold text-lg" style="color: hsl(230 25% 10%);">{item.t}</h3>
+              <p class="text-sm leading-relaxed" style="color: hsl(240 8% 42%);">{item.d}</p>
+              <div class="flex flex-wrap gap-1.5 mt-auto">
+                {item.tags.map(tag => <span class="text-xs px-2.5 py-1 rounded-full" style="background: hsl(240 10% 94%); color: hsl(240 8% 42%);">{tag}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Сообщество -->
+    <section class="py-20" style="background: hsl(240 8% 11%);" aria-labelledby="community-heading">
+      <div class="container mx-auto text-center">
+        <p class="section-label-dark">Сообщество</p>
+        <h2 id="community-heading" class="font-display text-3xl md:text-4xl font-bold text-white mb-4 max-w-2xl mx-auto">
+          Вы станете членом <span class="text-gradient">закрытого клуба</span> из 100+ руководителей ветеринарных клиник со всей России
+        </h2>
+        <p class="text-base max-w-xl mx-auto mb-8" style="color: hsl(240 20% 85%);">
+          ВЕКТОР — это площадка для обмена опытом, дискуссий, встреч с экспертами и решения сложных управленческих задач.
+        </p>
+        <a
+          href="#pricing"
+          class="inline-flex items-center font-medium px-7 py-3 rounded-full text-white text-base transition-opacity hover:opacity-90"
+          style="background: hsl(248 75% 52%);"
+        >Забронировать место</a>
+      </div>
+    </section>
+
+    <!-- Практические результаты -->
+    <section class="py-20 bg-white" aria-labelledby="metrics-heading">
+      <div class="container mx-auto">
+        <p class="section-label">Практические результаты</p>
+        <h2 id="metrics-heading" class="font-display text-3xl md:text-4xl font-bold mb-12" style="color: hsl(230 25% 10%);">
+          Результаты, которые получают клиники после внедрения системного управления
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {[
+            { n: "01", cat: "Финансовая управляемость", metric: "+15–30%", d: "Рост прибыли за счёт контроля расходов, загрузки персонала и иных управленческих решений" },
+            { n: "02", cat: "Эффективность команды", metric: "–40%", d: "Снижение потерь времени и ручного контроля собственника" },
+            { n: "03", cat: "Производительность клиники", metric: "+20–50%", d: "Рост выручки без расширения площади за счёт оптимизации процессов в каждом направлении клиники" },
+            { n: "04", cat: "Клиентский сервис", metric: "+30%", d: "Рост повторных обращений и рекомендаций клиентов" },
+            { n: "05", cat: "Управление персоналом", metric: "–35%", d: "Снижение текучки за счёт системного найма, адаптации и усиления роли руководителей" },
+            { n: "06", cat: "Скорость решений", metric: "в 2–3 раза", d: "Когда в клинике улучшаются процессы, команда работает как налаженная прозрачная система" },
+          ].map(item => (
+            <div class="p-6 rounded-2xl border" style="border-color: hsl(240 10% 90%);">
+              <span class="number-badge-light block mb-2">({item.n}) {item.cat}</span>
+              <div class="font-display font-bold text-3xl mb-2" style="color: hsl(248 80% 65%);">{item.metric}</div>
+              <p class="text-sm leading-relaxed" style="color: hsl(240 8% 42%);">{item.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Кому будет полезно -->
+    <section class="py-20" style="background: hsl(240 10% 96%);" aria-labelledby="audience-heading">
+      <div class="container mx-auto">
+        <p class="section-label">Для кого</p>
+        <h2 id="audience-heading" class="font-display text-3xl md:text-4xl font-bold mb-12" style="color: hsl(230 25% 10%);">
+          Кому <span class="text-gradient">будет полезно</span>
+        </h2>
+        <div class="grid md:grid-cols-2 gap-5">
+          {[
+            { n: "01", t: "Собственникам клиник, которые хотят построить систему и вырасти", d: "Научитесь управлять клиникой без ежедневного контроля, оптимизируете процессы и подготовите бизнес к расширению", tags: ["Система","Масштабирование","Процессы"] },
+            { n: "02", t: "Руководителям клиник, которые хотят повысить эффективность работы", d: "Научитесь выявлять проблемные зоны, улучшать качество клиентского сервиса и повышать общую эффективность клиники", tags: ["Эффективность","Сервис"] },
+            { n: "03", t: "Практикующим ветеринарным врачам, желающим перейти в управление", d: "Получите базу управленческих компетенций, необходимую для перехода от врачебной практики к руководящей роли", tags: ["Управление","Рост в роли"] },
+            { n: "04", t: "Желающим открыть свою первую клинику", d: "Поймёте, как открыть клинику с нуля и избежать типичных ошибок начинающих", tags: ["Старт","Без ошибок"] },
+          ].map(item => (
+            <div class="bg-white p-6 rounded-2xl border flex flex-col gap-3" style="border-color: hsl(240 10% 90%);">
+              <span class="number-badge-light">({item.n})</span>
+              <h3 class="font-display font-semibold text-lg" style="color: hsl(230 25% 10%);">{item.t}</h3>
+              <p class="text-sm leading-relaxed" style="color: hsl(240 8% 42%);">{item.d}</p>
+              <div class="flex flex-wrap gap-1.5 mt-auto">
+                {item.tags.map(tag => <span class="text-xs px-2.5 py-1 rounded-full" style="background: hsl(248 85% 96%); color: hsl(248 60% 35%);">{tag}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Тариф -->
+    <section id="pricing" class="py-20 bg-white" aria-labelledby="pricing-heading">
+      <div class="container mx-auto">
+        <p class="section-label">Тариф</p>
+        <h2 id="pricing-heading" class="font-display text-3xl md:text-4xl font-bold mb-12" style="color: hsl(230 25% 10%);">
+          Единый формат участия
+        </h2>
+        <div class="max-w-md mx-auto rounded-2xl p-8 border-2" style="border-color: hsl(248 80% 71%);">
+          <p class="text-sm font-medium mb-1" style="color: hsl(248 80% 65%);">Поток сентябрь 2026</p>
+          <h3 class="font-display font-bold text-xl mb-1" style="color: hsl(230 25% 10%);">Флагманский курс «Вектор»</h3>
+          <div class="font-display font-bold text-4xl my-5" style="color: hsl(230 25% 10%);">149 000 ₽</div>
+          <ul class="flex flex-col gap-3 mb-8" aria-label="Что входит в курс">
+            {[
+              "Доступ ко всем модулям курса",
+              "Онлайн-встречи с экспертами",
+              "Практические задания и разборы",
+              "Чат с кураторами и сообществом",
+              "Шаблоны документов и регламенты",
+              "Сертификат об окончании",
+            ].map(item => (
+              <li class="flex items-center gap-3 text-sm">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center" style="background: hsl(248 80% 71% / 0.15);" aria-hidden="true">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                    <path d="M1 4L3.5 6.5L9 1" stroke="hsl(248 80% 71%)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span style="color: hsl(230 25% 10%);">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="#contacts"
+            class="block w-full text-center font-medium py-3 rounded-full text-white text-base transition-opacity hover:opacity-90"
+            style="background: hsl(248 75% 52%);"
+          >Забронировать место</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20" style="background: hsl(240 10% 96%);" aria-labelledby="faq-heading">
+      <div class="container mx-auto">
+        <p class="section-label">FAQ</p>
+        <h2 id="faq-heading" class="font-display text-3xl md:text-4xl font-bold mb-12" style="color: hsl(230 25% 10%);">
+          Частые вопросы
+        </h2>
+        <div class="max-w-3xl flex flex-col gap-3">
+          {faqs.map((faq, i) => (
+            <div class="bg-white rounded-2xl border overflow-hidden" style="border-color: hsl(240 10% 90%);">
+              <h3 class="m-0">
+                <button
+                  class="faq-btn w-full flex items-center justify-between gap-4 p-5 text-left font-semibold text-base"
+                  style="color: hsl(230 25% 10%);"
+                  aria-expanded="false"
+                  aria-controls={`faq-answer-${i}`}
+                  id={`faq-btn-${i}`}
+                  type="button"
+                >
+                  <span>{faq.q}</span>
+                  <svg class="faq-icon flex-shrink-0 transition-transform duration-200" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </h3>
+              <div id={`faq-answer-${i}`} role="region" aria-labelledby={`faq-btn-${i}`} class="faq-answer hidden px-5 pb-5">
+                <p class="text-sm leading-relaxed" style="color: hsl(240 8% 42%);">{faq.a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- NVC Stats -->
+    <section class="py-20" style="background: hsl(240 8% 11%);" aria-labelledby="nvc-heading">
+      <div class="container mx-auto">
+        <p class="section-label-dark">Кстати, создатели Вектора — команда NVC</p>
+        <h2 id="nvc-heading" class="font-display text-2xl md:text-3xl font-bold text-white mb-12">
+          За плечами — крупнейшая отраслевая площадка страны
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { metric: "13+", label: "лет работы с отраслью" },
+            { metric: "329", label: "экспертов и спикеров" },
+            { metric: "8 000+", label: "участников ежегодно" },
+            { metric: "+50%", label: "рост секции «Менеджмент»" },
+          ].map(item => (
+            <div class="text-center">
+              <div class="font-display font-bold text-4xl md:text-5xl mb-2" style="color: hsl(248 80% 71%);">{item.metric}</div>
+              <p class="text-sm" style="color: hsl(240 20% 70%);">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contacts" class="py-20 bg-white" aria-labelledby="contact-heading">
+      <div class="container mx-auto">
+        <p class="section-label">Свяжитесь с нами</p>
+        <h2 id="contact-heading" class="font-display text-3xl md:text-4xl font-bold mb-12" style="color: hsl(230 25% 10%);">
+          Остались вопросы?
+        </h2>
+        <form class="max-w-lg flex flex-col gap-4" method="post" aria-label="Форма обратной связи">
+          <div>
+            <label for="contact-name" class="block text-sm font-medium mb-1.5" style="color: hsl(230 25% 10%);">Имя</label>
+            <input
+              id="contact-name"
+              type="text"
+              name="name"
+              required
+              placeholder="Ваше имя"
+              class="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-colors"
+              style="border-color: hsl(240 10% 90%); color: hsl(230 25% 10%);"
+            />
+          </div>
+          <div>
+            <label for="contact-email" class="block text-sm font-medium mb-1.5" style="color: hsl(230 25% 10%);">Email</label>
+            <input
+              id="contact-email"
+              type="email"
+              name="email"
+              required
+              placeholder="your@email.com"
+              class="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-colors"
+              style="border-color: hsl(240 10% 90%); color: hsl(230 25% 10%);"
+            />
+          </div>
+          <div>
+            <label for="contact-message" class="block text-sm font-medium mb-1.5" style="color: hsl(230 25% 10%);">Сообщение</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="4"
+              placeholder="Ваш вопрос или сообщение"
+              class="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-colors resize-none"
+              style="border-color: hsl(240 10% 90%); color: hsl(230 25% 10%);"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full py-3 rounded-full font-medium text-white text-base transition-opacity hover:opacity-90"
+            style="background: hsl(248 75% 52%);"
+          >Отправить</button>
+        </form>
+      </div>
+    </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-16 border-t border-white/5" style="background: hsl(240 8% 11%);">
+      <div class="container mx-auto">
+        <div class="grid md:grid-cols-3 gap-10">
+          <div>
+            <img src="/logo.png" alt="ВЕКТОР" class="h-8 w-auto mb-4" width="80" height="32" />
+            <p class="text-sm" style="color: hsl(240 20% 70%);">Первая школа управления для профессионалов ветеринарного бизнеса</p>
+          </div>
+          <nav aria-label="Навигация в подвале">
+            <h3 class="font-display font-semibold text-white mb-4">Навигация</h3>
+            <ul class="flex flex-col gap-2 text-sm">
+              <li><a href="#program" class="transition-colors hover:text-white" style="color: hsl(240 20% 70%);">Что нас отличает</a></li>
+              <li><a href="#speakers" class="transition-colors hover:text-white" style="color: hsl(240 20% 70%);">Преподаватели</a></li>
+              <li><a href="#format" class="transition-colors hover:text-white" style="color: hsl(240 20% 70%);">Программа обучения</a></li>
+              <li><a href="#pricing" class="transition-colors hover:text-white" style="color: hsl(240 20% 70%);">Тарифы</a></li>
+              <li><a href="#contacts" class="transition-colors hover:text-white" style="color: hsl(240 20% 70%);">Контакты</a></li>
+            </ul>
+          </nav>
+          <div>
+            <h3 class="font-display font-semibold text-white mb-4">Контакты</h3>
+            <ul class="flex flex-col gap-2 text-sm">
+              <li><a href="mailto:info@vectorvet.ru" class="hover:text-white transition-colors" style="color: hsl(240 20% 70%);">info@vectorvet.ru</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-white/5 text-center text-xs" style="color: hsl(240 15% 65%);">
+          © 2026 ВЕКТОР. Все права защищены.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          const isOpen = !mobileMenu.classList.contains('hidden');
+          mobileMenu.classList.toggle('hidden', isOpen);
+          menuBtn.setAttribute('aria-expanded', String(!isOpen));
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            menuBtn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // Module tabs
+      const moduleTabs = document.querySelectorAll<HTMLButtonElement>('.module-tab');
+      const modulePanels = document.querySelectorAll<HTMLElement>('.module-panel');
+      moduleTabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => {
+          moduleTabs.forEach((t, j) => {
+            const active = i === j;
+            t.setAttribute('aria-selected', String(active));
+            t.style.background = active ? 'hsl(248 75% 52%)' : 'hsl(240 10% 94%)';
+            t.style.color = active ? 'white' : 'hsl(240 8% 42%)';
+          });
+          modulePanels.forEach((p, j) => p.classList.toggle('hidden', i !== j));
+        });
+      });
+
+      // FAQ accordion
+      document.querySelectorAll<HTMLButtonElement>('.faq-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          const answerId = btn.getAttribute('aria-controls')!;
+          const answer = document.getElementById(answerId);
+          const icon = btn.querySelector<SVGElement>('.faq-icon');
+
+          document.querySelectorAll<HTMLButtonElement>('.faq-btn').forEach(b => {
+            b.setAttribute('aria-expanded', 'false');
+            const aId = b.getAttribute('aria-controls')!;
+            document.getElementById(aId)?.classList.add('hidden');
+            const ic = b.querySelector<SVGElement>('.faq-icon');
+            if (ic) ic.style.transform = '';
+          });
+
+          if (!expanded && answer) {
+            btn.setAttribute('aria-expanded', 'true');
+            answer.classList.remove('hidden');
+            if (icon) icon.style.transform = 'rotate(180deg)';
+          }
+        });
+      });
+    </script>
+  </body>
 </html>

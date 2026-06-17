@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+
+  --color-primary: hsl(248 80% 71%);
+  --color-primary-foreground: hsl(0 0% 100%);
+
+  --color-hero-bg: hsl(240 8% 11%);
+  --color-hero-foreground: hsl(0 0% 100%);
+  --color-hero-muted: hsl(240 20% 85%);
+  --color-hero-card: hsl(240 8% 16%);
+
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(230 25% 10%);
+  --color-muted: hsl(240 10% 94%);
+  --color-muted-foreground: hsl(240 8% 42%);
+  --color-border: hsl(240 10% 90%);
+
+  --color-secondary: hsl(240 10% 96%);
+  --color-secondary-foreground: hsl(240 10% 12%);
+
+  --radius-lg: 1rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    font-family: var(--font-inter);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 6rem;
+      padding-right: 6rem;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1400px;
+    }
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(248 80% 75%) 0%, hsl(280 80% 75%) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-hero {
+    background-color: var(--color-hero-bg);
+  }
+
+  .text-hero-foreground {
+    color: var(--color-hero-foreground);
+  }
+
+  .text-hero-muted {
+    color: var(--color-hero-muted);
+  }
+
+  .number-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: hsl(248 65% 40%);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-label-dark {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: hsl(248 80% 75%);
+    margin-bottom: 0.75rem;
+  }
+
+  .number-badge-light {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: hsl(248 65% 40%);
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+  }
+
+  .sphere-glow {
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, hsl(260 70% 60%) 0%, hsl(248 80% 45%) 40%, hsl(240 60% 20%) 70%, transparent 100%);
+    box-shadow: 0 0 80px 20px hsl(248 80% 71% / 0.4), 0 0 160px 40px hsl(248 80% 71% / 0.15);
+    position: relative;
+  }
+
+  .sphere-glow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.15) 0%, transparent 50%);
+  }
+
+  .sphere-dots {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 0.3;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+}
