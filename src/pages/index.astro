@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Logo from '../components/Logo.astro';
 
 const teachers = [
   {
@@ -254,9 +255,7 @@ function gridPoints(level: number, sides: number, maxR: number): string {
       style="background: hsl(240 8% 11% / 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);"
     >
       <div class="container mx-auto flex items-center justify-between h-16">
-        <a href="#" aria-label="ВЕКТОР — на главную">
-          <img src="/logo.png" alt="ВЕКТОР" class="h-8 w-auto" width="80" height="32" />
-        </a>
+        <Logo />
         <div class="hidden md:flex items-center gap-8" role="list">
           <a href="#program" role="listitem" class="text-sm transition-colors" style="color: hsl(240 20% 85%);">Что нас отличает</a>
           <a href="#speakers" role="listitem" class="text-sm transition-colors" style="color: hsl(240 20% 85%);">Преподаватели</a>
@@ -282,14 +281,17 @@ function gridPoints(level: number, sides: number, maxR: number): string {
         </button>
       </div>
       <div id="mobile-menu" class="hidden md:hidden border-t border-white/5" style="background: hsl(240 8% 11%);">
-        <nav class="container mx-auto py-4 flex flex-col gap-2">
+        <div class="container mx-auto py-4 flex flex-col gap-2">
+          <Logo class="mb-2" />
+          <nav class="flex flex-col gap-2" aria-label="Мобильная навигация">
           <a href="#program" class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">Что нас отличает</a>
           <a href="#speakers" class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">Преподаватели</a>
           <a href="#format" class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">Программа обучения</a>
           <a href="#pricing" class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">Тарифы</a>
           <a href="#contacts" class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">Контакты</a>
           <a href="#pricing" class="text-sm font-medium px-5 py-2.5 rounded-full text-white text-center mt-2" style="background: hsl(248 75% 52%);">Забронировать место</a>
-        </nav>
+          </nav>
+        </div>
       </div>
     </nav>
 
@@ -982,7 +984,17 @@ function gridPoints(level: number, sides: number, maxR: number): string {
             Остались <span class="text-gradient">вопросы?</span>
           </h2>
         </div>
-        <form class="bg-white rounded-2xl p-8 border flex flex-col gap-5" method="post" aria-label="Форма обратной связи" style="border-color: hsl(240 10% 90%); box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.07);">
+        <form
+          id="contact-form"
+          class="bg-white rounded-2xl p-8 border flex flex-col gap-5"
+          aria-label="Форма обратной связи"
+          style="border-color: hsl(240 10% 90%); box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.07);"
+        >
+          <div id="contact-form-status" class="hidden rounded-xl px-4 py-3 text-sm" role="status" aria-live="polite"></div>
+          <div class="sr-only" aria-hidden="true">
+            <label for="contact-website">Сайт</label>
+            <input id="contact-website" type="text" name="website" tabindex="-1" autocomplete="off" />
+          </div>
           <div>
             <label for="contact-name" class="block text-sm font-medium mb-1.5" style="color: hsl(230 25% 10%);">Имя</label>
             <input
@@ -1019,8 +1031,9 @@ function gridPoints(level: number, sides: number, maxR: number): string {
             ></textarea>
           </div>
           <button
+            id="contact-submit"
             type="submit"
-            class="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full font-semibold text-white text-sm transition-opacity hover:opacity-90"
+            class="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full font-semibold text-white text-sm transition-opacity hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
             style="background: hsl(248 75% 52%);"
           >
             Отправить
@@ -1037,7 +1050,7 @@ function gridPoints(level: number, sides: number, maxR: number): string {
       <div class="container mx-auto">
         <div class="grid md:grid-cols-3 gap-10">
           <div>
-            <img src="/logo.png" alt="ВЕКТОР" class="h-8 w-auto mb-4" width="80" height="32" />
+            <Logo class="h-10 mb-4" />
             <p class="text-sm" style="color: hsl(240 20% 70%);">Первая школа управления для профессионалов ветеринарного бизнеса</p>
           </div>
           <nav aria-label="Навигация в подвале">
@@ -1077,6 +1090,50 @@ function gridPoints(level: number, sides: number, maxR: number): string {
             mobileMenu.classList.add('hidden');
             menuBtn.setAttribute('aria-expanded', 'false');
           });
+        });
+      }
+
+      const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
+      const contactStatus = document.getElementById('contact-form-status');
+      const contactSubmit = document.getElementById('contact-submit') as HTMLButtonElement | null;
+
+      if (contactForm && contactStatus && contactSubmit) {
+        const defaultSubmitLabel = contactSubmit.innerHTML;
+
+        contactForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          contactSubmit.disabled = true;
+          contactSubmit.textContent = 'Отправка…';
+          contactStatus.className = 'hidden rounded-xl px-4 py-3 text-sm';
+          contactStatus.textContent = '';
+
+          try {
+            const response = await fetch('/api/contact', {
+              method: 'POST',
+              body: new FormData(contactForm),
+            });
+            const data = await response.json() as { ok?: boolean; error?: string };
+
+            contactStatus.classList.remove('hidden');
+            if (response.ok && data.ok) {
+              contactStatus.style.background = 'hsl(140 60% 94%)';
+              contactStatus.style.color = 'hsl(140 45% 28%)';
+              contactStatus.textContent = 'Сообщение отправлено. Мы свяжемся с вами в ближайшее время.';
+              contactForm.reset();
+            } else {
+              contactStatus.style.background = 'hsl(0 70% 96%)';
+              contactStatus.style.color = 'hsl(0 55% 35%)';
+              contactStatus.textContent = data.error ?? 'Не удалось отправить сообщение.';
+            }
+          } catch {
+            contactStatus.classList.remove('hidden');
+            contactStatus.style.background = 'hsl(0 70% 96%)';
+            contactStatus.style.color = 'hsl(0 55% 35%)';
+            contactStatus.textContent = 'Не удалось отправить сообщение. Попробуйте позже.';
+          } finally {
+            contactSubmit.disabled = false;
+            contactSubmit.innerHTML = defaultSubmitLabel;
+          }
         });
       }
 
