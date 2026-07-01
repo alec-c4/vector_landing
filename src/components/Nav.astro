@@ -1,0 +1,53 @@
+---
+import navLinks from '../data/nav';
+---
+
+<nav
+  id="main-nav"
+  aria-label="Основная навигация"
+  class="fixed top-0 left-0 right-0 z-50 border-b border-white/5"
+  style="background: hsl(240 8% 11% / 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);"
+>
+  <div class="container mx-auto flex items-center justify-between h-16">
+    <a href="#" aria-label="ВЕКТОР — на главную" class="flex-shrink-0">
+      <img src="/logo-min.png" alt="ВЕКТОР" class="h-12 w-auto max-w-[10rem] object-contain object-left" width="134" height="48" decoding="async" />
+    </a>
+    <div class="hidden lg:flex items-center gap-6 xl:gap-8 min-w-0 flex-shrink" role="list">
+      {
+        navLinks.map((link) => (
+          <a href={link.href} role="listitem" class="text-sm whitespace-nowrap transition-colors" style="color: hsl(240 20% 85%);">
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href="#pricing"
+        class="text-sm font-medium px-5 py-2 rounded-full text-white whitespace-nowrap flex-shrink-0 transition-opacity hover:opacity-90"
+        style="background: hsl(248 75% 52%);"
+      >Забронировать место</a>
+    </div>
+    <button
+      id="mobile-menu-btn"
+      aria-label="Открыть меню"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="lg:hidden p-2 text-white"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-white/5" style="background: hsl(240 8% 11%);">
+    <nav class="container mx-auto py-4 flex flex-col gap-2" aria-label="Мобильная навигация">
+      {
+        navLinks.map((link) => (
+          <a href={link.href} class="text-sm py-2 transition-colors" style="color: hsl(240 20% 85%);">
+            {link.label}
+          </a>
+        ))
+      }
+      <a href="#pricing" class="text-sm font-medium px-5 py-2.5 rounded-full text-white text-center mt-2" style="background: hsl(248 75% 52%);">Забронировать место</a>
+    </nav>
+  </div>
+</nav>

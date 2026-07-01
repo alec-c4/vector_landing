@@ -1,0 +1,58 @@
+---
+import type { Teacher } from '../../types/content';
+
+interface Props {
+  teacher: Teacher;
+  eager?: boolean;
+  embedded?: boolean;
+}
+
+const { teacher, eager = false, embedded = false } = Astro.props;
+---
+
+<article
+  class:list={[
+    'speaker-card flex flex-col h-full',
+    embedded
+      ? 'p-5 lg:p-7 bg-white'
+      : 'p-5 sm:p-6 rounded-2xl border bg-white',
+  ]}
+  style={embedded ? undefined : 'border-color: hsl(240 10% 90%); box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.07);'}
+>
+  <div class="speaker-card-inner flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-5 flex-1 min-h-0">
+    <div class="speaker-card-photo w-32 lg:w-44 flex-shrink-0 mx-auto lg:mx-0">
+      <div class="w-full overflow-hidden rounded-xl lg:h-[14.75rem]" style="aspect-ratio: 3/4; background: hsl(240 10% 94%);">
+        <img
+          src={teacher.photo}
+          alt={teacher.name}
+          class="w-full h-full object-cover object-top"
+          width="180"
+          height="240"
+          loading={eager ? 'eager' : 'lazy'}
+          fetchpriority={eager ? 'high' : undefined}
+        />
+      </div>
+    </div>
+    <div class="speaker-card-body flex flex-col flex-1 min-w-0">
+      <div class="speaker-card-meta mb-3 lg:mb-4 lg:min-h-[9.25rem]">
+        <h3 class="font-display text-lg lg:text-xl font-bold mb-0.5 leading-snug" style="color: hsl(230 25% 10%);">{teacher.name}</h3>
+        <p class="text-sm font-medium mb-3 leading-snug lg:min-h-[2.75rem]" style="color: hsl(248 80% 65%);">{teacher.role}</p>
+        <div class="flex flex-wrap gap-2 lg:min-h-[3.75rem] content-start">
+          {teacher.tags.map((tag) => (
+            <span class="chip-primary text-xs">{tag}</span>
+          ))}
+        </div>
+      </div>
+      <ul class="speaker-card-list flex flex-col gap-1.5 flex-1">
+        {
+          teacher.bullets.map((b) => (
+            <li class="text-sm flex gap-2" style="color: hsl(240 8% 42%);">
+              <span class="flex-shrink-0 mt-0.5" style="color: hsl(248 80% 71%);" aria-hidden="true">•</span>
+              <span>{b}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</article>

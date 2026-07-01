@@ -1,0 +1,81 @@
+---
+import SpeakerCard from '../SpeakerCard.astro';
+import teachers from '../../data/teachers';
+import { buildDesktopSpeakerSlides, buildMobileSpeakerSlides } from '../../lib/teachers';
+
+const mobileSlides = buildMobileSpeakerSlides(teachers);
+const desktopSlides = buildDesktopSpeakerSlides(teachers);
+---
+
+<section id="speakers" class="py-16 md:py-24 bg-white" aria-labelledby="speakers-heading">
+  <div class="container mx-auto">
+    <span class="badge-border">Топовые преподаватели</span>
+    <h2 id="speakers-heading" class="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 max-w-xl" style="color: hsl(230 25% 10%);">
+      Владельцы и управленцы ветеринарных клиников, лидеры мнений,&nbsp;<span class="text-gradient">спикеры ведущих конференций</span>
+    </h2>
+
+    <!-- Mobile & tablet: 1 спикер + стрелки по бокам -->
+    <div class="lg:hidden speakers-carousel" data-speakers-carousel="mobile">
+      <div class="flex items-stretch gap-2">
+        <button
+          type="button"
+          data-speakers-prev
+          aria-label="Предыдущий спикер"
+          class="speakers-nav-btn flex-shrink-0 self-center"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="flex-1 min-w-0" data-speakers-track>
+          {
+            mobileSlides.map((group, slideIdx) => (
+              <div class="speakers-slide" hidden={slideIdx > 0}>
+                <SpeakerCard teacher={group[0]} eager={slideIdx === 0} />
+              </div>
+            ))
+          }
+        </div>
+        <button
+          type="button"
+          data-speakers-next
+          aria-label="Следующий спикер"
+          class="speakers-nav-btn flex-shrink-0 self-center"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="flex justify-center gap-1.5 mt-4" data-speakers-dots aria-hidden="true">
+        {
+          mobileSlides.map((_, i) => (
+            <span class={`speakers-dot${i === 0 ? ' is-active' : ''}`}></span>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Desktop: 2 спикера в общем контейнере + стрелки справа -->
+    <div class="hidden lg:block relative speakers-carousel" data-speakers-carousel="desktop">
+      <div data-speakers-track>
+        {
+          desktopSlides.map((group, slideIdx) => (
+            <div
+              class="speakers-slide speakers-slide-pair"
+              hidden={slideIdx > 0}
+            >
+              {group.map((teacher, cardIdx) => (
+                <SpeakerCard teacher={teacher} eager={slideIdx === 0 && cardIdx === 0} embedded />
+              ))}
+            </div>
+          ))
+        }
+      </div>
+      <div class="flex justify-end gap-2 mt-6">
+        <button type="button" data-speakers-prev aria-label="Previous slide" class="speakers-nav-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" data-speakers-next aria-label="Next slide" class="speakers-nav-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+import Icon from '../Icon.astro';
+import perspectives from '../../data/perspectives';
+---
+
+<section id="audience" class="py-16 md:py-24 bg-white relative overflow-hidden" aria-labelledby="perspectives-heading">
+  <div class="absolute top-1/4 -left-40 w-[28rem] h-[28rem] rounded-full pointer-events-none" style="background: hsl(248 80% 71% / 0.1); filter: blur(80px);"></div>
+  <div class="container mx-auto relative">
+    <div class="max-w-3xl mb-14">
+      <span class="badge-light">Для кого</span>
+      <h2 id="perspectives-heading" class="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" style="color: hsl(230 25% 10%);">
+        Одна программа — <span style="color: hsl(248 80% 71%);">три перспективы</span>
+      </h2>
+      <p class="mt-6 text-base md:text-lg leading-relaxed max-w-3xl" style="color: hsl(240 8% 42%);">
+        Управленческая команда клиники: собственник, управляющий и главный врач. Теория общая — практические задания адаптируются под уровень ответственности и управленческую роль участника.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-6 gap-4 md:gap-6">
+      {
+        perspectives.map((item) => (
+          <div class={`${item.span} rounded-3xl p-6 md:p-8 flex flex-col ${item.dark ? 'card-dark' : 'card-light'}`} data-reveal>
+            <div class="flex items-start gap-4 mb-5">
+              <div class={item.dark ? 'icon-box' : 'icon-box-light'}>
+                <Icon name={item.icon} />
+              </div>
+              <div class="text-xs pt-3 opacity-60" style={item.dark ? 'color: hsl(240 20% 85%);' : 'color: hsl(240 8% 42%);'}>({item.num})</div>
+            </div>
+            <h3 class={`font-display text-xl md:text-2xl font-bold mb-2 leading-snug ${item.dark ? 'text-white' : ''}`} style={!item.dark ? 'color: hsl(230 25% 10%);' : ''}>{item.title}</h3>
+            {item.role && <p class="text-xs md:text-sm font-medium mb-3" style="color: hsl(248 80% 71%);">{item.role}</p>}
+            <p class="text-sm md:text-base leading-relaxed" style={item.dark ? 'color: hsl(240 20% 75%);' : 'color: hsl(240 8% 42%);'}>{item.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

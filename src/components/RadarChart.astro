@@ -1,0 +1,111 @@
+---
+import {
+  defaultRadarValues,
+  gridPoints,
+  radarPoints,
+} from '../lib/radar';
+
+interface Props {
+  labels: string[];
+  values?: number[];
+  size?: number;
+  compact?: boolean;
+  chartId?: string;
+}
+
+const {
+  labels,
+  values = defaultRadarValues,
+  size = 280,
+  compact = false,
+  chartId = 'radar-default',
+} = Astro.props;
+
+const glowId = `${chartId}-glow`;
+const coreId = `${chartId}-core`;
+
+const maxR = compact ? 100 : 110;
+const labelR = compact ? 118 : 128;
+const viewBox = compact ? '-130 -130 260 260' : '-150 -150 300 300';
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox={viewBox}
+  xmlns="http://www.w3.org/2000/svg"
+  class="radar-chart"
+  aria-hidden="true"
+>
+  <defs>
+    <filter id={glowId} x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <radialGradient id={coreId} cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="hsl(248 80% 71% / 0.45)" />
+      <stop offset="100%" stop-color="hsl(248 80% 71% / 0)" />
+    </radialGradient>
+  </defs>
+
+  <circle cx="0" cy="0" r={maxR * 0.35} fill={`url(#${coreId})`} />
+
+  {
+    [1, 2, 3, 4].map((i) => (
+      <polygon
+        points={gridPoints(i, labels.length, maxR)}
+        fill="none"
+        stroke="hsl(248 80% 71% / 0.35)"
+        stroke-width="1"
+        stroke-dasharray="4 4"
+      />
+    ))
+  }
+
+  {
+    labels.map((_, k) => {
+      const angle = (k * 2 * Math.PI) / labels.length - Math.PI / 2;
+      return (
+        <line
+          x1="0"
+          y1="0"
+          x2={Math.cos(angle) * maxR}
+          y2={Math.sin(angle) * maxR}
+          stroke="hsl(248 80% 71% / 0.25)"
+          stroke-width="1"
+        />
+      );
+    })
+  }
+
+  <polygon
+    points={radarPoints(values, maxR)}
+    fill="hsl(248 80% 71% / 0.25)"
+    stroke="hsl(248 80% 71%)"
+    stroke-width="2"
+    filter={`url(#${glowId})`}
+  />
+
+  {
+    labels.map((label, k) => {
+      const angle = (k * 2 * Math.PI) / labels.length - Math.PI / 2;
+      return (
+        <text
+          x={Math.cos(angle) * labelR}
+          y={Math.sin(angle) * labelR}
+          text-anchor="middle"
+          dominant-baseline="middle"
+          fill="hsl(240 20% 88%)"
+          font-size={compact ? '10' : '11'}
+          font-family="Inter, sans-serif"
+          font-weight="500"
+        >
+          {label}
+        </text>
+      );
+    })
+  }
+</svg>

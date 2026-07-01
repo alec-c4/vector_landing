@@ -1,0 +1,65 @@
+---
+import Icon from '../Icon.astro';
+import outcomes from '../../data/outcomes';
+---
+
+<section class="py-16 md:py-24 bg-white relative overflow-hidden" aria-labelledby="outcomes-heading">
+  <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full pointer-events-none" style="background: hsl(248 80% 71% / 0.1); filter: blur(80px);"></div>
+  <div class="container mx-auto relative">
+    <div class="max-w-3xl mb-14">
+      <span class="badge-light">Результаты курса</span>
+      <h2 id="outcomes-heading" class="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" style="color: hsl(230 25% 10%);">
+        С чем вы выйдете <span style="color: hsl(248 80% 71%);">после обучения</span>
+      </h2>
+      <p class="mt-6 text-base md:text-lg leading-relaxed" style="color: hsl(240 8% 42%);">
+        ВЕКТОР — это не просто знания. Это системные изменения в вашем мышлении, управлении и работе клиники. После курса у вас будет понятная картина бизнеса, ясные приоритеты и инструменты для роста.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-6 gap-4 md:gap-6">
+      {
+        outcomes.map((item, idx) => (
+          <div class={`${item.span} card-light rounded-3xl p-6 md:p-8 flex flex-col`} data-reveal>
+            <div class="flex items-center gap-4 mb-5">
+              <div class="icon-box-light flex-shrink-0">
+                <Icon name={item.icon} />
+              </div>
+              <div class="text-xs opacity-60" style="color: hsl(240 8% 42%);">({String(idx + 1).padStart(2, '0')})</div>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl font-bold mb-3 leading-snug" style="color: hsl(230 25% 10%);">{item.title}</h3>
+            {item.lead && <p class="text-sm md:text-base leading-relaxed mb-4" style="color: hsl(240 8% 42%);">{item.lead}</p>}
+            {
+              item.bullets && (
+                <ul class="space-y-2 mb-2">
+                  {
+                    item.bullets.map((b) => (
+                      <li class="flex gap-3 items-start text-sm md:text-base">
+                        <span class="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background: hsl(248 80% 71%);"></span>
+                        <span style="color: hsl(230 25% 10%);">{b}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              )
+            }
+            {
+              item.tags && (
+                <div class="mt-2 flex flex-wrap gap-2">
+                  {item.tags.map((tag) => <span class="chip-primary text-xs">{tag}</span>)}
+                </div>
+              )
+            }
+            {
+              item.flow && (
+                <div class="mt-2 flex flex-wrap items-center gap-2 md:gap-3">
+                  {item.flow.map((f) => (
+                    <span class="chip-primary px-4 py-2 rounded-xl text-sm md:text-base font-medium">{f}</span>
+                  ))}
+                </div>
+              )
+            }
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

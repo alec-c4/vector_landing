@@ -1,0 +1,35 @@
+<section
+  aria-labelledby="hero-heading"
+  class="relative h-screen min-h-[600px] overflow-hidden flex items-center"
+  style="background: hsl(240 30% 6%); padding-top: 5rem;"
+>
+  <canvas
+    id="hero-sphere"
+    class="hidden md:block absolute right-0 top-0 h-full pointer-events-none"
+    style="width: 55%;"
+    aria-hidden="true"
+  ></canvas>
+  <div class="hidden md:block absolute right-0 top-0 h-full pointer-events-none" style="width: 55%; background: linear-gradient(to right, hsl(240 30% 6%) 0%, transparent 35%);" aria-hidden="true"></div>
+  <div class="md:hidden absolute inset-0 pointer-events-none opacity-40" aria-hidden="true"
+    style="background: radial-gradient(circle at 70% 30%, hsl(265 80% 55% / 0.4), transparent 60%);">
+  </div>
+
+  <div class="container mx-auto relative z-10 py-16 md:py-24">
+    <div class="max-w-2xl">
+      <h1 id="hero-heading" class="font-display font-bold text-white leading-tight mb-4" style="font-size: clamp(2rem, 5vw, 3.5rem);">
+        Первая <span class="text-gradient">школа управления</span> для профессионалов ветеринарного бизнеса
+      </h1>
+      <p class="text-sm md:text-base mb-6 max-w-lg" style="color: hsl(240 20% 85%);">
+        Системное управление ветеринарной клиникой на основе лучших практик отрасли
+      </p>
+      <a
+        href="#pricing"
+        class="inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-full text-white text-base transition-opacity hover:opacity-90"
+        style="background: hsl(248 75% 52%);"
+      >
+        Забронировать место
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>

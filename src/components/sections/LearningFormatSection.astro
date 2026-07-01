@@ -1,0 +1,39 @@
+---
+import Icon from '../Icon.astro';
+import learningFormatCards from '../../data/learningFormat';
+---
+
+<section id="format" class="py-16 md:py-24 bg-white relative overflow-hidden" aria-labelledby="learning-format-heading">
+  <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full pointer-events-none" style="background: hsl(248 80% 71% / 0.1); filter: blur(80px);"></div>
+  <div class="absolute bottom-0 left-0 w-[28rem] h-[28rem] rounded-full pointer-events-none" style="background: hsl(248 80% 71% / 0.05); filter: blur(80px);"></div>
+  <div class="container mx-auto relative">
+    <div class="max-w-3xl mb-14">
+      <span class="badge-light">Формат обучения</span>
+      <h2 id="learning-format-heading" class="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4" style="color: hsl(230 25% 10%);">
+        Обучение, встроенное в <span style="color: hsl(248 80% 71%);">реальную работу клиники</span>
+      </h2>
+      <p class="text-base md:text-lg" style="color: hsl(240 8% 42%);">
+        Практический формат для занятых собственников и управленцев: вы работаете на задачах своей клиники, внедряете изменения по ходу программы и получаете поддержку экспертов на каждом этапе.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+      {
+        learningFormatCards.map((item) => (
+          <div class="card-dark rounded-3xl p-6 md:p-8 flex flex-col" data-reveal>
+            <div class="flex items-start gap-4 mb-5">
+              <div class="icon-box">
+                <Icon name={item.icon} />
+              </div>
+              <div class="text-xs pt-3 opacity-60" style="color: hsl(240 20% 85%);">({item.num})</div>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-3 leading-snug">{item.title}</h3>
+            <p class="text-sm md:text-base leading-relaxed mb-5" style="color: hsl(240 20% 75%);">{item.desc}</p>
+            <div class="mt-auto flex flex-wrap gap-2">
+              {item.chips.map((c) => <span class="chip-primary text-xs md:text-sm">{c}</span>)}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

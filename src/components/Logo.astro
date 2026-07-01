@@ -2,19 +2,27 @@
 interface Props {
   class?: string;
   href?: string;
-  /** `light` — белый логотип для тёмного фона; `dark` — тёмный для светлого фона */
+  /** `light` — для тёмного фона; `dark` — для светлого фона */
   variant?: 'light' | 'dark';
+  /** Компактный wordmark для шапки (logo.png) */
+  compact?: boolean;
 }
 
 const {
   class: className = 'h-8',
   href = '#',
   variant = 'light',
+  compact = false,
 } = Astro.props;
 
-const src = variant === 'light' ? '/logo-light.png' : '/logo-dark.png';
-const width = variant === 'light' ? 180 : 120;
-const height = variant === 'light' ? 64 : 88;
+const src = compact
+  ? '/logo.png'
+  : variant === 'light'
+    ? '/logo-light.png'
+    : '/logo-dark.png';
+
+const width = compact ? 154 : variant === 'light' ? 180 : 120;
+const height = compact ? 32 : variant === 'light' ? 64 : 88;
 const alt = 'ВЕКТОР — ветеринарная школа управления';
 ---
 

@@ -1,0 +1,25 @@
+---
+import { nvcStats } from '../../data/metrics';
+---
+
+<section class="py-16 md:py-24 bg-white relative overflow-hidden" aria-labelledby="nvc-heading">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] rounded-full pointer-events-none" style="background: hsl(248 80% 71% / 0.1); filter: blur(80px);"></div>
+  <div class="container mx-auto relative">
+    <div class="text-center max-w-4xl mx-auto mb-14">
+      <span class="badge-primary-text">Кстати, создатели Вектора — команда NVC</span>
+      <h2 id="nvc-heading" class="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" style="color: hsl(230 25% 10%);">
+        За плечами — крупнейшая отраслевая площадка страны
+      </h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 max-w-5xl mx-auto">
+      {
+        nvcStats.map((item) => (
+          <div class="text-center">
+            <div class="font-display font-bold text-4xl md:text-6xl mb-3" style="color: hsl(248 80% 71%);">{item.metric}</div>
+            <p class="text-sm md:text-base" style="color: hsl(240 8% 42%);">{item.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

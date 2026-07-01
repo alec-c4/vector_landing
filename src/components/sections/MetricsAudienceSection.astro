@@ -1,0 +1,46 @@
+---
+import { metrics, audience } from '../../data/metrics';
+---
+
+<section class="py-16 md:py-24 bg-white" aria-labelledby="metrics-heading">
+  <div class="container mx-auto">
+    <span class="badge-light">Практические результаты</span>
+    <h2 id="metrics-heading" class="font-display text-3xl md:text-4xl font-bold mb-12" style="color: hsl(230 25% 10%);">
+      Результаты, которые получают клиники после внедрения системного управления
+    </h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {
+        metrics.map((item) => (
+          <div class="p-6 rounded-2xl border" style="border-color: hsl(240 10% 90%);" data-reveal>
+            <span class="number-badge-light block mb-2">({item.num}) {item.category}</span>
+            <div class="font-display font-bold text-3xl mb-2" style="color: hsl(248 80% 65%);">{item.metric}</div>
+            <p class="text-sm leading-relaxed" style="color: hsl(240 8% 42%);">{item.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="py-16 md:py-24 bg-white" aria-labelledby="audience-heading">
+  <div class="container mx-auto">
+    <span class="badge-light">Для кого</span>
+    <h2 id="audience-heading" class="font-display text-3xl md:text-4xl font-bold mb-12" style="color: hsl(230 25% 10%);">
+      Кому <span class="text-gradient">будет полезно</span>
+    </h2>
+    <div class="grid md:grid-cols-2 gap-5">
+      {
+        audience.map((item) => (
+          <div class="card-light rounded-3xl p-6 md:p-8 flex flex-col gap-3" data-reveal>
+            <span class="number-badge-light">({item.num})</span>
+            <h3 class="font-display font-semibold text-lg" style="color: hsl(230 25% 10%);">{item.title}</h3>
+            <p class="text-sm leading-relaxed" style="color: hsl(240 8% 42%);">{item.desc}</p>
+            <div class="flex flex-wrap gap-1.5 mt-auto">
+              {item.tags.map((tag) => <span class="chip-primary text-xs">{tag}</span>)}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

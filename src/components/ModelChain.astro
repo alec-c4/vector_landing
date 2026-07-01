@@ -1,0 +1,30 @@
+---
+interface Props {
+  labels: string[];
+}
+
+const { labels } = Astro.props;
+---
+
+<div class="model-chain">
+  {
+    labels.map((label, index) => (
+      <div class="model-chain-item">
+        <div class="chain-step">{label}</div>
+        {index < labels.length - 1 && (
+          <div class="chain-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 5v14M12 19l-4-4M12 19l4-4"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        )}
+      </div>
+    ))
+  }
+</div>

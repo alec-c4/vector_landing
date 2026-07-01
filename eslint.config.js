@@ -31,6 +31,21 @@ export default [
     },
   },
   {
+    files: ['src/scripts/**/*.ts'],
+    languageOptions: {
+      parser: tsParser,
+      globals: {
+        document: 'readonly',
+        window: 'readonly',
+        fetch: 'readonly',
+        setTimeout: 'readonly',
+        requestAnimationFrame: 'readonly',
+        performance: 'readonly',
+        ResizeObserver: 'readonly',
+      },
+    },
+  },
+  {
     ignores: ['dist/**', 'node_modules/**', '.astro/**'],
   },
 ];

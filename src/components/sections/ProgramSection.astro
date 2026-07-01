@@ -1,0 +1,33 @@
+---
+import Icon from '../Icon.astro';
+import programFeatures from '../../data/programFeatures';
+---
+
+<section id="differentiators" class="py-16 md:py-24 bg-white relative overflow-hidden" aria-labelledby="program-heading">
+  <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full pointer-events-none" style="background: hsl(248 80% 71% / 0.1); filter: blur(80px);"></div>
+  <div class="absolute bottom-0 right-0 w-[28rem] h-[28rem] rounded-full pointer-events-none" style="background: hsl(248 80% 71% / 0.05); filter: blur(80px);"></div>
+  <div class="container mx-auto relative">
+    <div class="max-w-3xl mb-14">
+      <span class="badge-light">Что нас отличает</span>
+      <h2 id="program-heading" class="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" style="color: hsl(230 25% 10%);">
+        Программа, созданная <span style="color: hsl(248 80% 71%);">для ветеринарии</span>
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {
+        programFeatures.map((item) => (
+          <div class="card-dark rounded-3xl p-6 md:p-8 flex flex-col" data-reveal>
+            <div class="flex items-start gap-4 mb-5">
+              <div class="icon-box">
+                <Icon name={item.icon} />
+              </div>
+              <div class="text-xs pt-3 opacity-60" style="color: hsl(240 20% 85%);">({item.num})</div>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-3 leading-snug">{item.title}</h3>
+            <p class="text-sm md:text-base leading-relaxed" style="color: hsl(240 20% 75%);">{item.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
