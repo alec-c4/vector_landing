@@ -3,11 +3,10 @@ import type { Teacher } from '../../types/content';
 
 interface Props {
   teacher: Teacher;
-  eager?: boolean;
   embedded?: boolean;
 }
 
-const { teacher, eager = false, embedded = false } = Astro.props;
+const { teacher, embedded = false } = Astro.props;
 ---
 
 <article
@@ -28,8 +27,8 @@ const { teacher, eager = false, embedded = false } = Astro.props;
           class="w-full h-full object-cover object-top"
           width="180"
           height="240"
-          loading={eager ? 'eager' : 'lazy'}
-          fetchpriority={eager ? 'high' : undefined}
+          loading="lazy"
+          decoding="async"
         />
       </div>
     </div>

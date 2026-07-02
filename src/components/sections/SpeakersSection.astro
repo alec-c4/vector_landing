@@ -29,7 +29,7 @@ const desktopSlides = buildDesktopSpeakerSlides(teachers);
           {
             mobileSlides.map((group, slideIdx) => (
               <div class="speakers-slide" hidden={slideIdx > 0}>
-                <SpeakerCard teacher={group[0]} eager={slideIdx === 0} />
+                <SpeakerCard teacher={group[0]} />
               </div>
             ))
           }
@@ -62,7 +62,7 @@ const desktopSlides = buildDesktopSpeakerSlides(teachers);
               hidden={slideIdx > 0}
             >
               {group.map((teacher, cardIdx) => (
-                <SpeakerCard teacher={teacher} eager={slideIdx === 0 && cardIdx === 0} embedded />
+                <SpeakerCard teacher={teacher} embedded />
               ))}
             </div>
           ))
